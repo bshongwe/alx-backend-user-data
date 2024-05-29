@@ -5,11 +5,11 @@ Module: Log Filter
 import re
 from typing import List
 import logging
-from logging import Logger, StreamHandler
+#from logging import Logger, StreamHandler
 import os
 import mysql.connector
-from filtered_logger import get_db, PII_FIELDS
-from datetime import datetime
+#from filtered_logger import get_db, PII_FIELDS
+#from datetime import datetime
 #from filtered_logger import RedactingFormatter
 
 
