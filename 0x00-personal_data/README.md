@@ -29,59 +29,73 @@
    - Script: `filtered_logger.py`
    - Description: Implements a function to obfuscate sensitive data in log messages using regular expressions. 🔒
 <br></br>
+
 ### Task 1.Log formatter:
    - Script: `filtered_logger.py`
    - Description: Provides a custom log formatter class for redacting sensitive information in log records. 📝
 <br></br>
+
 ### Task 2. Create logger:
    - Script: `filtered_logger.py`
    - Description: Implements a function to create a logger object with specific configurations for handling personal data securely. 📜
 <br></br>
+
 ### Task 3. Connect to secure database:
    - Script: `filtered_logger.py`
    - Description: Connects to a secure database to read user data, using environment variables to store database credentials securely. 🛡️
 <br></br>
+
 ### Task 4. Read and filter data:
    - Script: `filtered_logger.py`
    - Description: Reads user data from a database and logs it after filtering sensitive information. 🕵️‍♂️
 <br></br>
+
 ### Task 5. Encrypting passwords:
    - Script: `encrypt_password.py`
    - Description: Provides functions to hash passwords securely using bcrypt. 🔐
 <br></br>
+
 ### Task 6. Check valid password:
    - Script: `encrypt_password.py`
    - Description: Implements a function to validate passwords against their hashed versions securely using bcrypt. ✅
 <br></br>
+
 # Edge Test Files:
 Edge test files for edge cases and additional scenarios for each task:
 ### Task 0:
 -	**file:** `/task-0/main.py`
 -	**test:** `./main.py`
 <br></br>
+
 ### Task 1:
 -	**file:** `/task-1/main.py`
 -       **test:** `./main.py`
 <br></br>
+
 ### Task 2:
 -	**file:** `/task-2/main.py`
 -       **test:** `./main.py`
 <br></br>
+
 ### Task 3:
 -	**files:** `/task-3/main.sql`, `task-3/main.py`
 -       **tests:** `cat main.sql | mysql -uroot -p`, `echo "SELECT COUNT(*) FROM users;" | mysql -uroot -p my_db`, `./main.py`
 <br></br>
+
 ### Task 4:
 -	**file:** `/task4/main.sql`
 -	**tests:** `cat main.sql | mysql -uroot -p`, `echo "SELECT COUNT(*) FROM users;" | mysql -uroot -p my_db`, `PERSONAL_DATA_DB_USERNAME=root PERSONAL_DATA_DB_PASSWORD=root PERSONAL_DATA_DB_HOST=localhost PERSONAL_DATA_DB_NAME=my_db ./filtered_logger.py`
 <br></br>
+
 ### Task 5:
 -	**file:** `main.py`
 -	**test:** `./main.py`
 <br></br>
+
 ### Task 6:
 -	**file:** `/task-6/main.py`
 -	**test:** `./main.py`
+<br></br>
 
 ### Files
 - **filtered_logger.py:** Contains functions for logging and filtering sensitive information.  
