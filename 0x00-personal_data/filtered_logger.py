@@ -78,6 +78,7 @@ def main():
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
     """
+
     REDACTION = "***"
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     FORMAT_FIELDS = ('name', 'levelname', 'asctime', 'message')
