@@ -3,6 +3,7 @@
 """
 import re
 from typing import TypeVar
+import binascii
 
 from models.user import User
 from .auth import Auth
