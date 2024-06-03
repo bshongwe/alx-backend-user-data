@@ -4,6 +4,7 @@
 import re
 from typing import TypeVar
 
+from models.user import User
 from .auth import Auth
 
 
