@@ -2,7 +2,7 @@
 """Basic authentication module for the API.
 """
 import re
-from typing import TypeVar
+from typing import TypeVar, Tuple
 import binascii
 import base64
 
