@@ -1,46 +1,28 @@
 #!/usr/bin/env python3
 """API module: Session authentication
 """
-import re
-import os
-from flask import request
-from typing import List, TypeVar
-
-
-class Auth:
-    """Class: Authentication
+class SessionAuth(Auth):
+    """Session authentication class.
     """
-    def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """Checks if path requires authentication
-        """
-        if path is not None and excluded_paths is not None:
-            for exclusion_path in map(lambda x: x.strip(), excluded_paths):
-                pattern = ''
-                if exclusion_path[-1] == '*':
-                    pattern = '{}.*'.format(exclusion_path[0:-1])
-                elif exclusion_path[-1] == '/':
-                    pattern = '{}/*'.format(exclusion_path[0:-1])
-                else:
-                    pattern = '{}/*'.format(exclusion_path)
-                if re.match(pattern, path):
-                    return False
-        return True
+    user_id_by_session_id = {}
 
-    def authorization_header(self, request=None) -> str:
-        """Gets auth header field from the request
+    def create_session(self, user_id: str = None) -> str:
+        """Creates a session id for the user.
         """
-        if request is not None:
-            return request.headers.get('Authorization', None)
-        return None
+        if type(user_id) is str:
+            session_id = str(uuid4())
+            self.user_id_by_session_id[session_id] = user_id
+            return session_id
 
-    def current_user(self, request=None) -> TypeVar('User'):
-        """Gets current user from the request
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """Retrieves the user id of the user associated with
+        a given session id.
         """
-        return None
+        if type(session_id) is str:
+            return self.user_id_by_session_id.get(session_id)
 
-    def session_cookie(self, request=None) -> str:
-        """Gets value of the cookie named SESSION_NAME
+    def current_user(self, request=None) -> User:
+        """Retrieves the user associated with the request.
         """
-        if request is not None:
-            cookie_name = os.getenv('SESSION_NAME')
-            return request.cookies.get(cookie_name)
+        user_id = self.user_id_for_session_id(self.session_cookie(request))
+        return User.get(user_id)
