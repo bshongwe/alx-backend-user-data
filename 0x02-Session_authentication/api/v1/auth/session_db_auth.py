@@ -10,8 +10,10 @@ from .session_exp_auth import SessionExpAuth
 
 
 class SessionDBAuth(SessionExpAuth):
-    """Session authentication class with expiration and storage support.
+    """Session authentication class with expiration and storage
+    support.
     """
+
     def create_session(self, user_id=None) -> str:
         """Creates and stores a session id for the user.
         """
