@@ -36,6 +36,7 @@ def users() -> str:
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
 
+
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
 def login() -> str:
     """Task 11: POST /sessions
@@ -52,7 +53,8 @@ def login() -> str:
     response.set_cookie("session_id", session_id)
     return response
 
-app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+
+@app.route("/sessions", methods=["DELETE"], strict_slashes=False)
 def logout() -> str:
     """Task 14: DELETE /sessions
     Logout endpoint to destroy a user's session.
@@ -66,6 +68,7 @@ def logout() -> str:
         abort(403)
     AUTH.destroy_session(user.id)
     return redirect("/")
+
 
 @app.route("/profile", methods=["GET"], strict_slashes=False)
 def profile() -> str:
@@ -83,7 +86,7 @@ def profile() -> str:
 @app.route("/reset_password", methods=["POST"], strict_slashes=False)
 def get_reset_password_token() -> str:
     """Task 17: POST /reset_password
-    Reset password endpoint to generate a reset token for a user.
+    Reset password endpoint to generate reset token for user.
 
     Return:
         - The user's password reset payload.
@@ -97,6 +100,35 @@ def get_reset_password_token() -> str:
     if reset_token is None:
         abort(403)
     return jsonify({"email": email, "reset_token": reset_token})
+
+
+@app.route("/reset_password", methods=["PUT"], strict_slashes=False)
+def update_password() -> str:
+    """Task 18: PUT /reset_password
+    Update user's password using reset token.
+
+    Args:
+        reset_token (str): The reset token.
+        password (str): The new password.
+
+    Raises:
+        ValueError: If the user does not exist.
+
+    Return:
+        - The user's password updated payload.
+    """
+    email = request.form.get("email")
+    reset_token = request.form.get("reset_token")
+    new_password = request.form.get("new_password")
+    is_password_changed = False
+    try:
+        AUTH.update_password(reset_token, new_password)
+        is_password_changed = True
+    except ValueError:
+        is_password_changed = False
+    if not is_password_changed:
+        abort(403)
+    return jsonify({"email": email, "message": "Password updated"})
 
 
 if __name__ == "__main__":
