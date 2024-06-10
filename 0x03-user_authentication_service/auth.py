@@ -65,7 +65,7 @@ class Auth:
         return False
 
     def create_session(self, email: str) -> str:
-        """Task 12: Creates a new session for a user.
+        """Task 11: Creates a new session for a user.
         """
         user = None
         try:
@@ -77,3 +77,15 @@ class Auth:
         session_id = _generate_uuid()
         self._db.update_user(user.id, session_id=session_id)
         return session_id
+
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
+        """Task 12: Retrieves user based on given session ID.
+        """
+        user = None
+        if session_id is None:
+            return None
+        try:
+            user = self._db.find_user_by(session_id=session_id)
+        except NoResultFound:
+            return None
+        return user
