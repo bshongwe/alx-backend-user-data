@@ -52,6 +52,17 @@ def login() -> str:
     response.set_cookie("session_id", session_id)
     return response
 
+def destroy_session(self, user_id: int) -> None:
+        """Destroy user's session by setting their
+        session ID to None.
+
+        Args:
+            user_id (int): The ID of the user.
+        """
+        if user_id is None:
+            return None
+        self._db.update_user(user_id, session_id=None)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
