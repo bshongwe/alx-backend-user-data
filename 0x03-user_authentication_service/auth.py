@@ -119,6 +119,13 @@ class Auth:
     def update_password(self, reset_token: str, password: str) -> None:
         """Task 18: Updates a user's password given the
         user's reset token.
+
+        Args:
+            reset_token (str): The reset token.
+            password (str): The new password.
+
+        Raises:
+            ValueError: If the user does not exist.
         """
         user = None
         try:
