@@ -77,3 +77,32 @@ class DB:
         if result is None:
             raise NoResultFound()
         return result
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """Update user's attributes.
+
+        Args:
+            user_id (int): ID of user to update.
+            **kwargs: Arbitrary keyword arguments to update
+            user's attributes.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: If an attribute is invalid.
+        """
+        user = self.find_user_by(id=user_id)
+        if user is None:
+            return
+        update_source = {}
+        for key, value in kwargs.items():
+            if hasattr(User, key):
+                update_source[getattr(User, key)] = value
+            else:
+                raise ValueError()
+        self._session.query(User).filter(User.id == user_id).update(
+            update_source,
+            synchronize_session=False,
+        )
+        self._session.commit()
