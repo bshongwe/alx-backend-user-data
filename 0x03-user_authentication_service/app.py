@@ -38,7 +38,7 @@ def users() -> str:
 
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
 def login() -> str:
-    """POST /sessions
+    """Task 11: POST /sessions
     Login endpoint to create a new session.
 
     Return:
@@ -51,6 +51,21 @@ def login() -> str:
     response = jsonify({"email": email, "message": "logged in"})
     response.set_cookie("session_id", session_id)
     return response
+
+app.route("/sessions", methods=["DELETE"], strict_slashes=False)
+def logout() -> str:
+    """Task 12: DELETE /sessions
+    Logout endpoint to destroy a user's session.
+
+    Return:
+        - Redirects to home route.
+    """
+    session_id = request.cookies.get("session_id")
+    user = AUTH.get_user_from_session_id(session_id)
+    if user is None:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return redirect("/")
 
 
 if __name__ == "__main__":
