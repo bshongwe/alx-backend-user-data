@@ -104,18 +104,8 @@ def get_reset_password_token() -> str:
 
 @app.route("/reset_password", methods=["PUT"], strict_slashes=False)
 def update_password() -> str:
-    """Task 18: PUT /reset_password
-    Update user's password using reset token.
-
-    Args:
-        reset_token (str): The reset token.
-        password (str): The new password.
-
-    Raises:
-        ValueError: If the user does not exist.
-
-    Return:
-        - The user's password updated payload.
+    """Task 19: PUT /reset_password
+    Update password endpoint to update user password.
     """
     email = request.form.get("email")
     reset_token = request.form.get("reset_token")
