@@ -14,7 +14,6 @@ AUTH = Auth()
 def index() -> str:
     """GET /
     Route handler for root endpoint.
-
     Return:
         - Home page's payload.
     """
@@ -25,7 +24,6 @@ def index() -> str:
 def users() -> str:
     """POST /users
     Endpoint to register a user.
-
     Return:
         - The account creation payload.
     """
@@ -41,7 +39,6 @@ def users() -> str:
 def login() -> str:
     """Task 11: POST /sessions
     Login endpoint to create a new session.
-
     Return:
         - The account login payload.
     """
@@ -58,7 +55,6 @@ def login() -> str:
 def logout() -> str:
     """Task 14: DELETE /sessions
     Logout endpoint to destroy a user's session.
-
     Return:
         - Redirects to home route.
     """
@@ -87,7 +83,6 @@ def profile() -> str:
 def get_reset_password_token() -> str:
     """Task 17: POST /reset_password
     Reset password endpoint to generate reset token for user.
-
     Return:
         - The user's password reset payload.
     """

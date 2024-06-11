@@ -30,18 +30,8 @@ class Auth:
         self._db = DB()
 
     def register_user(self, email: str, password: str) -> User:
-        """Register new user into DB.
-
-        Args:
-            email (str): Email of user.
-            password (str): Password of user.
-
-        Returns:
-            User: Newly created User object.
-
-        Raises:
-            ValueError: If a user already exists with
-            provided email.
+        """Register new user into DB, raises ValueError
+        if it already exists
         """
         try:
             self._db.find_user_by(email=email)
@@ -93,9 +83,6 @@ class Auth:
     def destroy_session(self, user_id: int) -> None:
         """Task 13: Destroy user's session by setting
         their session ID to None.
-
-        Args:
-            user_id (int): The ID of the user.
         """
         if user_id is None:
             return None
@@ -119,13 +106,6 @@ class Auth:
     def update_password(self, reset_token: str, password: str) -> None:
         """Task 18: Updates a user's password given the
         user's reset token.
-
-        Args:
-            reset_token (str): The reset token.
-            password (str): The new password.
-
-        Raises:
-            ValueError: If the user does not exist.
         """
         user = None
         try:
